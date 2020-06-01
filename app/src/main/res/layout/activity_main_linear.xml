@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <TextView
+        android:id="@+id/top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/GUI"
+        android:textSize="30dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/buttom1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/click"
+            android:textSize="14dip"
+            android:visibility="visible" />
+
+        <CheckBox
+            android:id="@+id/chb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/check"
+            android:visibility="visible" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        <ImageButton
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/img"
+            android:src="@drawable/flag" />
+        <Switch
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/sw"
+            android:id="@+id/swt"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/edt"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:hint="@string/type"
+        android:inputType="textPersonName|textCapWords" />
+</LinearLayout>
