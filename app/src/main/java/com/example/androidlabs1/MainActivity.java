@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_grid);
+        setContentView(R.layout.activity_main_linear);
         TextView txt = findViewById(R.id.top);
         Button btn = findViewById(R.id.buttom1);
         CheckBox ch = findViewById(R.id.chb);
