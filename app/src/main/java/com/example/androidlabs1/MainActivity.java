@@ -20,8 +20,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_linear);
-        TextView txt = findViewById(R.id.top);
+        setContentView(R.layout.activity_main_lab3);
+
+        TextView txt = findViewById(R.id.top1);
         Button btn = findViewById(R.id.buttom1);
         CheckBox ch = findViewById(R.id.chb);
         ImageButton imageButton = findViewById(R.id.img);

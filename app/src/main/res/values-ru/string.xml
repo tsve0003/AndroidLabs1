@@ -9,4 +9,7 @@
     <string name="check">Проверь!</string>
     <string name="sw">вкл/выкл</string>
     <string name="type">Печатать здесь</string>
+    <string name = "email">Введите ваш электронный адресс</string>
+    <string name = "typeEmail">Печатать здесь</string>
+    <string name = "password">Пароль</string>
 </resources>
