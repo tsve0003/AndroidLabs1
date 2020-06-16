@@ -8,11 +8,10 @@
     <string name="check">Check this out!</string>
     <string name="sw">Switch on/off</string>
     <string name="type">Type Here</string>
-    <string name = "email">Enter your email address</string>
-    <string name = "typeEmail">Type your email here</string>
-    <string name = "password">Type your password</string>
-
-
+    <string name="email">Enter your email address</string>
+    <string name="typeEmail">Type your email here</string>
+    <string name="password">Type your password</string>
+    <string name="login">Login</string>
 
 
 </resources>

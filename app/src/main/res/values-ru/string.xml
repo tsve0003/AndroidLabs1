@@ -12,4 +12,5 @@
     <string name = "email">Введите ваш электронный адресс</string>
     <string name = "typeEmail">Печатать здесь</string>
     <string name = "password">Пароль</string>
+    <string name = "login">Пароль</string>
 </resources>
