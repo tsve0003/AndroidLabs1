@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
+
     EditText emailField;
     SharedPreferences sp;
     Button loginBtn;
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         editor.commit();
     }
 }
-}
+
 //    SharedPreferences prefs = null;
 //
 //    @Override

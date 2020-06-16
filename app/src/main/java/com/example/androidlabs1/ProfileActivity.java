@@ -22,9 +22,9 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         // get the intent that got us here
-        Intent loginPage = getIntent();
+        Intent fromMain = getIntent();
 
-        String emailTyped = loginPage.getStringExtra("emailTyped");
+        String emailTyped = fromMain.getStringExtra("EMAIL");
 
         //Put the string that was sent from FirstActivity into the edit text:
         EditText enterText = (EditText) findViewById(R.id.enterEmail);
