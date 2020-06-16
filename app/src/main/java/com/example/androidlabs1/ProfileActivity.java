@@ -27,7 +27,7 @@ public class ProfileActivity extends AppCompatActivity {
         String emailTyped = loginPage.getStringExtra("emailTyped");
 
         //Put the string that was sent from FirstActivity into the edit text:
-        EditText enterText = (EditText) findViewById(R.id.EmailEditText);
+        EditText enterText = (EditText) findViewById(R.id.enterEmail);
         enterText.setText(emailTyped);
 
         takePictureBtn = (ImageButton) findViewById(R.id.ImageButton);

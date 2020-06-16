@@ -13,4 +13,10 @@
     <string name = "typeEmail">Печатать здесь</string>
     <string name = "password">Пароль</string>
     <string name = "login">Пароль</string>
+    <string name="yourProfile">Ваш профайл</string>
+    <string name="yourName">Ваше имя:</string>
+    <string name="enterName">Введите ваше имя</string>
+    <string name="yourEmail">Ваш email:</string>
+    <string name="enterEmail">Введите ваш email:</string>
+    <string name="yourPicture">Ваша фотография:</string>
 </resources>
