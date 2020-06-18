@@ -40,10 +40,10 @@ public class MainActivity extends AppCompatActivity {
             //Give directions to go from this page, to SecondActivity
 //            EditText et = (EditText)findViewById(R.id.edt2);
 
-            profilePage.putExtra("emailTyped", emailField.getText().toString());
+            profilePage.putExtra("EMAIL", emailField.getText().toString());
 
             //Now make the transition:
-            startActivityForResult( profilePage, 345);
+            startActivity( profilePage);
         });
     }
 

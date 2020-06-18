@@ -48,13 +48,18 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            takePictureBtn.setImageBitmap(imageBitmap);
+        if (requestCode == REQUEST_IMAGE_CAPTURE) {
+            if (resultCode == RESULT_OK) {
+                Bundle extras = data.getExtras();
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                takePictureBtn.setImageBitmap(imageBitmap);
+            } else if (resultCode == RESULT_CANCELED) {
+                takePictureBtn.setImageResource(R.drawable.ic_rose);
+            }
+            Log.d(ACTIVITY_NAME, "In function: onActivityResult()");
         }
-        Log.d(ACTIVITY_NAME, "In function: onActivityResult()");
     }
+
 
     @Override
     protected void onStart() {
