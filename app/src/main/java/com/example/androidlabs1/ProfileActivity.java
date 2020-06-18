@@ -81,9 +81,9 @@ public class ProfileActivity extends AppCompatActivity {
         super.onStop();
         Log.d(ACTIVITY_NAME, "In function: onStop()");
     }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+        @Override
+        protected void onDestroy() {
+            super.onDestroy();
         Log.d(ACTIVITY_NAME, "In function: onDestroy()");
     }
 }
