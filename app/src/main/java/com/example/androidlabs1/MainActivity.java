@@ -27,20 +27,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_lab3);
 
-        emailField = (EditText)findViewById(R.id.edt1);
+        emailField = findViewById(R.id.edt1);
         sp = getSharedPreferences("FileName", Context.MODE_PRIVATE);
-        String savedString = sp.getString("ReserveName", "Default value");
+        String savedString = sp.getString("ReserveName", "");
 
-        emailField.setHint(savedString);
+        emailField.setText(savedString);
 
         loginBtn = (Button)findViewById(R.id.login);
         loginBtn.setOnClickListener( c -> {
 
             Intent profilePage = new Intent(MainActivity.this, ProfileActivity.class);
             //Give directions to go from this page, to SecondActivity
-            EditText et = (EditText)findViewById(R.id.edt2);
+//            EditText et = (EditText)findViewById(R.id.edt2);
 
-            profilePage.putExtra("emailTyped", et.getText().toString());
+            profilePage.putExtra("emailTyped", emailField.getText().toString());
 
             //Now make the transition:
             startActivityForResult( profilePage, 345);
@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sp.edit();
 
         //save what was typed under the name "ReserveName"
-        String whatWasTyped = emailField.getText().toString();
-        editor.putString("ReserveName", whatWasTyped);
+        String ReservedName = emailField.getText().toString();
+        editor.putString("ReserveName", ReservedName);
 
         //write it to disk:
         editor.commit();

@@ -9,7 +9,7 @@
     <string name="sw">Switch on/off</string>
     <string name="type">Type Here</string>
     <string name="email">Enter your email address</string>
-    <string name="typeEmail">Type your email here</string>
+    <string name="typeEmail">Type email here</string>
     <string name="password">Type your password</string>
     <string name="login">Login</string>
     <string name="yourProfile">Your profile</string>
@@ -18,10 +18,7 @@
     <string name="yourEmail">Your email:</string>
     <string name="enterEmail">Enter your email:</string>
     <string name="yourPicture">Your Picture:</string>
-
-
-
-
+    <string name="clickTheButton">Click the button above to take a picture</string>
 
 
 </resources>
