@@ -40,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
 
         });
-        Log.d(ACTIVITY_NAME, "In function: onCreate()");
+        Log.e(ACTIVITY_NAME, "In function: onCreate()");
 
 
     }
@@ -56,7 +56,7 @@ public class ProfileActivity extends AppCompatActivity {
             } else if (resultCode == RESULT_CANCELED) {
                 takePictureBtn.setImageResource(R.drawable.ic_rose);
             }
-            Log.d(ACTIVITY_NAME, "In function: onActivityResult()");
+            Log.e(ACTIVITY_NAME, "In function: onActivityResult()");
         }
     }
 
