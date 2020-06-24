@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -29,6 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
         //Put the string that was sent from FirstActivity into the edit text:
         EditText enterText = (EditText) findViewById(R.id.enterEmail);
         enterText.setText(emailTyped);
+
 
         takePictureBtn = (ImageButton) findViewById(R.id.ImageButton);
         takePictureBtn.setOnClickListener(c -> {
@@ -59,12 +61,15 @@ public class ProfileActivity extends AppCompatActivity {
             Log.e(ACTIVITY_NAME, "In function: onActivityResult()");
         }
     }
+    Button btnCht = findViewById (R.id.chatBtn);
+    
+
 
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.e(ACTIVITY_NAME, "In function: onStart()");
+        Log.d(ACTIVITY_NAME, "In function: onStart()");
     }
     @Override
     protected void onResume() {

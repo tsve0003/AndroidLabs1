@@ -20,4 +20,5 @@
     <string name="enterEmail">Введите ваш email:</string>
     <string name="yourPicture">Ваша фотография:</string>
     <string name="clickTheButton">Нажмите кнопку выше, чтобы сфотографировать</string>
+    <string name="chat">Иди в чат</string>
 </resources>

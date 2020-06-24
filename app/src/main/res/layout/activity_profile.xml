@@ -58,6 +58,14 @@
         android:text="@string/clickTheButton"
         android:textSize="23dp" />
 
+    <Button
+        android:id="@+id/chatBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/chat"
+        android:textSize="14dip"
+        android:visibility="visible" />
+
 
 
 
