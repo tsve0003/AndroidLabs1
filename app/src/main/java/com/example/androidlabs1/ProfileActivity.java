@@ -42,10 +42,23 @@ public class ProfileActivity extends AppCompatActivity {
             }
 
         });
-        Log.e(ACTIVITY_NAME, "In function: onCreate()");
+        Button btnCht = (Button)findViewById (R.id.chatBtn);
+        btnCht.setOnClickListener(c ->  {
+            Intent goToChatPage = new Intent(ProfileActivity.this, ChatRoomActivity.class);
 
+            startActivity(goToChatPage);
+
+        });
+
+            Log.e(ACTIVITY_NAME, "In function: onCreate()");
+
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
 
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -61,8 +74,6 @@ public class ProfileActivity extends AppCompatActivity {
             Log.e(ACTIVITY_NAME, "In function: onActivityResult()");
         }
     }
-    Button btnCht = findViewById (R.id.chatBtn);
-    
 
 
 
