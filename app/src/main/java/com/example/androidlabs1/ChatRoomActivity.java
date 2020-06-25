@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -100,6 +101,7 @@ public class ChatRoomActivity extends AppCompatActivity {
             return position;
         }
 
+
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             MessageModel message = getItem(position);
@@ -116,7 +118,8 @@ public class ChatRoomActivity extends AppCompatActivity {
             }
             return convertView;
         }
+        }
 
     }
-}
+
 
