@@ -1,41 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="10dp"
-    android:paddingRight="15dp"
-    android:paddingLeft="60dp"
-    android:clipToPadding="false">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <View
-        android:id="@+id/receiverAvatar"
-        android:layout_alignParentRight="true"
-        android:scaleType="centerInside"
-        android:background="@drawable/row_receive"
-        android:layout_width="34dp"
-        android:layout_height="34dp" />
-
-    <TextView
-        android:id="@+id/receiverName"
-        android:layout_marginLeft="15dp"
-        android:layout_toLeftOf="@+id/receiverAvatar"
-        android:layout_alignTop="@+id/receiverAvatar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="4dp"
-        android:text="Phuc"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewMessage"
-        android:layout_below="@+id/receiverName"
-        android:layout_alignRight="@+id/receiverName"
-        android:background="@drawable/receive_message"
-        android:paddingVertical="12dp"
-        android:paddingHorizontal="16dp"
-        android:elevation="2dp"
-        android:textSize="18dp"
-        android:text="How are you doing? This is a long message that should probably wrap."
+    <ImageView
+        android:id="@+id/sendAvatar"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/row_send"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         />
-</RelativeLayout>
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/sendAvatar"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

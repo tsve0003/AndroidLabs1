@@ -45,7 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
         Button btnCht = (Button)findViewById (R.id.chatBtn);
         btnCht.setOnClickListener(c ->  {
             Intent goToChatPage = new Intent(ProfileActivity.this, ChatRoomActivity.class);
-
+            goToChatPage.putExtra("name", "Eric");
             startActivity(goToChatPage);
 
         });

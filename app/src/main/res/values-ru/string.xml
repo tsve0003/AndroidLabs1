@@ -21,5 +21,7 @@
     <string name="yourPicture">Ваша фотография:</string>
     <string name="clickTheButton">Нажмите кнопку выше, чтобы сфотографировать</string>
     <string name="chat">Иди в чат</string>
-    <string name="typeHere">Напечатайте здесь</string>
+    <string name="textField">Напечатайте здесь</string>
+    <string name="SendText">Отправить</string>
+    <string name="ReceiveText">Получить</string>
 </resources>
