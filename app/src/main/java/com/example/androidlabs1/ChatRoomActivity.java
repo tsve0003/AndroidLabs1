@@ -1,8 +1,9 @@
 package com.example.androidlabs1;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -13,7 +14,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class ChatRoomActivity extends AppCompatActivity {
     ArrayList<MessageModel> list = new ArrayList<>();
@@ -22,39 +28,49 @@ public class ChatRoomActivity extends AppCompatActivity {
     Button receiveButton;
     ListView theList;
 
+    EditText editText;
+    List<MessageModel> listMessage = new ArrayList<>();
+    Button sendBtn;
+    Button receiveBtn;
+    ListView listView;
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
 
-        theList = findViewById(R.id.aListView);
-        theList.setAdapter(myAdapter = new MyListAdapter());
-        myAdapter.notifyDataSetChanged();
+        listView = (ListView) findViewById(R.id.ListView);
+        editText = (EditText) findViewById(R.id.ChatEditText);
+        sendBtn = (Button) findViewById(R.id.SendBtn);
+        receiveBtn = (Button) findViewById(R.id.ReceiveBtn);
 
-        sendButton= findViewById(R.id.sendButton);
-        sendButton.setOnClickListener(new Button.OnClickListener(){
 
-            @Override
-            public void onClick(View v) {
-                EditText textEdit = findViewById(R.id.textField);
-                MessageModel message = new MessageModel(textEdit.getText().toString(), true);
-                list.add(0, message);
-                myAdapter.notifyDataSetChanged();
-                textEdit.setText("");
-            }
+        sendBtn.setOnClickListener(c -> {
+            String message = editText.getText().toString();
+            MessageModel model = new MessageModel(message, true);
+            listMessage.add(model);
+            ChatAdapter adt = new ChatAdapter(listMessage, getApplicationContext());
+            listView.setAdapter(adt);
+            adt.notifyDataSetChanged();
+            editText.setText("");
+
+
         });
-        receiveButton = findViewById(R.id.receiveButton);
-        receiveButton.setOnClickListener(new Button.OnClickListener(){
 
-            @Override
-            public void onClick(View v) {
-                EditText textEdit = findViewById(R.id.textField);
-                MessageModel message = new MessageModel(textEdit.getText().toString(), false);
-                list.add(0, message);
-                myAdapter.notifyDataSetChanged();
-                textEdit.setText("");
-            }
+        receiveBtn.setOnClickListener(c -> {
+            String message = editText.getText().toString();
+            MessageModel model = new MessageModel(message, false);
+            listMessage.add(model);
+            editText.setText("");
+            ChatAdapter adt = new ChatAdapter(listMessage, getApplicationContext());
+            listView.setAdapter(adt);
+            adt.notifyDataSetChanged();
+            editText.setText("");
         });
+
+
+        Log.d("ChatRoomActivity", "onCreate");
     }
     public void showAlertDialog(View v){
         theList.setOnItemLongClickListener (new AdapterView.OnItemLongClickListener() {
@@ -83,17 +99,28 @@ public class ChatRoomActivity extends AppCompatActivity {
             }
         });
     }
-    private class MyListAdapter extends BaseAdapter {
-        //ArrayList<String> list;
-        @Override
-        public int getCount() {
-            //     list = new ArrayList<>();
-            return list.size();
+
+
+    class ChatAdapter extends BaseAdapter {
+
+        private List<MessageModel> messageModels;
+        private Context context;
+        private LayoutInflater inflater;
+
+        public ChatAdapter(List<MessageModel> messageModels, Context context) {
+            this.messageModels = messageModels;
+            this.context = context;
+            this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
         @Override
-        public MessageModel getItem(int position) {
-            return list.get(position);
+        public int getCount() {
+            return messageModels.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return messageModels.get(position);
         }
 
         @Override
@@ -101,25 +128,22 @@ public class ChatRoomActivity extends AppCompatActivity {
             return position;
         }
 
-
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            MessageModel message = getItem(position);
-            int layout;
-            if (message.isSend){
-                layout = R.layout.activity_main_send;
-            }else{
-                layout = R.layout.activity_main_receive;
-            }
-            if(convertView == null) {
-                convertView = getLayoutInflater().inflate(layout, parent, false);
-                EditText textEdit = convertView.findViewById(R.id.message);
-                textEdit.setText(message.message);
-            }
-            return convertView;
-        }
-        }
+            View view = convertView;
 
+            if (view == null) {
+                if (messageModels.get(position).isSend()) {
+                    view = inflater.inflate(R.layout.activity_main_send, null);
+
+                } else {
+                    view = inflater.inflate(R.layout.activity_main_receive, null);
+                }
+                TextView messageText = (TextView) view.findViewById(R.id.textViewMessage);
+                messageText.setText(messageModels.get(position).message);
+            }
+            return view;
+        }
     }
 
-
+}
