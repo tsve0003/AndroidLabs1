@@ -22,18 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatRoomActivity extends AppCompatActivity {
-    ArrayList<MessageModel> list = new ArrayList<>();
-    BaseAdapter myAdapter;
-    Button sendButton;
-    Button receiveButton;
-    ListView theList;
 
-    EditText editText;
-    List<MessageModel> listMessage = new ArrayList<>();
-    Button sendBtn;
-    Button receiveBtn;
-    ListView listView;
-
+    private  ArrayList<MessageModel> listMessage = new ArrayList<>();
+    private  Button sendBtn;
+    private  Button receiveBtn;
+    private  ListView listView;
+    private  EditText editText;
+    private ChatAdapter adt;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,12 +36,14 @@ public class ChatRoomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat_room);
 
         listView = (ListView) findViewById(R.id.ListView);
+        listView.setAdapter(adt = new ChatAdapter());
         editText = (EditText) findViewById(R.id.ChatEditText);
+
         sendBtn = (Button) findViewById(R.id.SendBtn);
         receiveBtn = (Button) findViewById(R.id.ReceiveBtn);
-       // ChatAdapter adt = new ChatAdapter(listMessage, getApplicationContext());
 
-//        public void showAlertDialog (View v) {
+
+//       public void showAlertDialog (View v) {
 //            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 //                @Override
 //                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -78,23 +75,18 @@ public class ChatRoomActivity extends AppCompatActivity {
         sendBtn.setOnClickListener(c -> {
             String message = editText.getText().toString();
             MessageModel model = new MessageModel(message, true);
-            ChatAdapter adt1 = new ChatAdapter(listMessage, getApplicationContext());
+            listMessage.add(model);
+            listView.setAdapter(adt);
+            adt.notifyDataSetChanged();
             editText.setText("");
-            listView.setAdapter(adt1);
-         //  adt1.notifyDataSetChanged();
-
-
-
         });
 
         receiveBtn.setOnClickListener(c -> {
             String message = editText.getText().toString();
             MessageModel model = new MessageModel(message, false);
             listMessage.add(model);
-            ChatAdapter adt1 = new ChatAdapter(listMessage, getApplicationContext());
-
-            listView.setAdapter(adt1);
-            adt1.notifyDataSetChanged();
+            listView.setAdapter(adt);
+            adt.notifyDataSetChanged();
             editText.setText("");
         });
 
@@ -105,24 +97,16 @@ public class ChatRoomActivity extends AppCompatActivity {
 
     class ChatAdapter extends BaseAdapter {
 
-        private List<MessageModel> messageModels;
-        private Context context;
-        private LayoutInflater inflater;
 
-        public ChatAdapter(List<MessageModel> messageModels, Context context) {
-            this.messageModels = messageModels;
-            this.context = context;
-            this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
 
         @Override
         public int getCount() {
-            return messageModels.size();
+            return listMessage.size();
         }
 
         @Override
-        public Object getItem(int position) {
-            return messageModels.get(position);
+        public MessageModel getItem(int position) {
+            return listMessage.get(position);
         }
 
         @Override
@@ -133,19 +117,24 @@ public class ChatRoomActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
            MessageModel message = (MessageModel) getItem(position);
-            int layout;
-            if (message.isSend){
-                layout = R.layout.activity_main_send;
-            }else{
-                layout = R.layout.activity_main_receive;
+            View newView = convertView;
+            LayoutInflater inflater = getLayoutInflater();
+
+            if(newView == null) {
+                if (message.isSend) {
+                    newView = inflater.inflate(R.layout.activity_main_send, parent, false);
+                }
+                else {
+                    newView = inflater.inflate(R.layout.activity_main_receive, parent, false);
+                }
             }
-            if(convertView == null) {
-                convertView = getLayoutInflater().inflate(layout, parent, false);
-                EditText textEdit = convertView.findViewById(R.id.message);
-                textEdit.setText(message.message);
-            }
-            return convertView;
+            TextView  messageText = (TextView)newView.findViewById(R.id.textViewMessage);
+            messageText.setText(listMessage.get(position).message);
+
+
+            return newView;
         }
+
     }
     }
 
