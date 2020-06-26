@@ -23,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="4dp"
+        android:text="Rose"
         android:textColor="@color/colorPrimary"/>
 
     <TextView
@@ -31,7 +32,7 @@
         android:id="@+id/textViewMessage"
         android:layout_below="@+id/senderName"
         android:layout_alignLeft="@+id/senderName"
-
+        android:background="@drawable/send_message"
         android:paddingVertical="12dp"
         android:paddingHorizontal="16dp"
         android:elevation="2dp"

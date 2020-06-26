@@ -44,16 +44,45 @@ public class ChatRoomActivity extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.ChatEditText);
         sendBtn = (Button) findViewById(R.id.SendBtn);
         receiveBtn = (Button) findViewById(R.id.ReceiveBtn);
+       // ChatAdapter adt = new ChatAdapter(listMessage, getApplicationContext());
+
+//        public void showAlertDialog (View v) {
+//            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//                @Override
+//                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                    AlertDialog.Builder alert = new AlertDialog.Builder(ChatRoomActivity.this);
+//                    alert.setTitle("Alert");
+//                    alert.setMessage("Do you want to delete this?");
+//                    alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            list.remove(listView);
+//                            Toast.makeText(ChatRoomActivity.this, "The selected row is: \n The database id is: ",
+//                                    Toast.LENGTH_SHORT).show();
+//                            adt.notifyDataSetChanged();
+//                        }
+//                    });
+//                    alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//
+//                        }
+//                    });
+//                    alert.create().show();
+//                    return true;
+//                }
+//            });
+
 
 
         sendBtn.setOnClickListener(c -> {
             String message = editText.getText().toString();
             MessageModel model = new MessageModel(message, true);
-            listMessage.add(model);
-            ChatAdapter adt = new ChatAdapter(listMessage, getApplicationContext());
-            listView.setAdapter(adt);
-            adt.notifyDataSetChanged();
+            ChatAdapter adt1 = new ChatAdapter(listMessage, getApplicationContext());
             editText.setText("");
+            listView.setAdapter(adt1);
+         //  adt1.notifyDataSetChanged();
+
 
 
         });
@@ -62,42 +91,15 @@ public class ChatRoomActivity extends AppCompatActivity {
             String message = editText.getText().toString();
             MessageModel model = new MessageModel(message, false);
             listMessage.add(model);
-            editText.setText("");
-            ChatAdapter adt = new ChatAdapter(listMessage, getApplicationContext());
-            listView.setAdapter(adt);
-            adt.notifyDataSetChanged();
+            ChatAdapter adt1 = new ChatAdapter(listMessage, getApplicationContext());
+
+            listView.setAdapter(adt1);
+            adt1.notifyDataSetChanged();
             editText.setText("");
         });
 
 
         Log.d("ChatRoomActivity", "onCreate");
-    }
-    public void showAlertDialog(View v){
-        theList.setOnItemLongClickListener (new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(ChatRoomActivity.this);
-                alert.setTitle("Alert");
-                alert.setMessage("Do you want to delete this?");
-                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        list.remove(theList);
-                        Toast.makeText(ChatRoomActivity.this, "The selected row is: \n The database id is: ",
-                                Toast.LENGTH_SHORT).show();
-                        myAdapter.notifyDataSetChanged();
-                    }
-                });
-                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                alert.create().show();
-                return true;
-            }
-        });
     }
 
 
@@ -130,20 +132,21 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view = convertView;
-
-            if (view == null) {
-                if (messageModels.get(position).isSend()) {
-                    view = inflater.inflate(R.layout.activity_main_send, null);
-
-                } else {
-                    view = inflater.inflate(R.layout.activity_main_receive, null);
-                }
-                TextView messageText = (TextView) view.findViewById(R.id.textViewMessage);
-                messageText.setText(messageModels.get(position).message);
+           MessageModel message = (MessageModel) getItem(position);
+            int layout;
+            if (message.isSend){
+                layout = R.layout.activity_main_send;
+            }else{
+                layout = R.layout.activity_main_receive;
             }
-            return view;
+            if(convertView == null) {
+                convertView = getLayoutInflater().inflate(layout, parent, false);
+                EditText textEdit = convertView.findViewById(R.id.message);
+                textEdit.setText(message.message);
+            }
+            return convertView;
         }
     }
+    }
 
-}
+
