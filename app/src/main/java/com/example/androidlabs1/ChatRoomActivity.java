@@ -42,18 +42,33 @@ public class ChatRoomActivity extends AppCompatActivity {
         sendBtn = (Button) findViewById(R.id.SendBtn);
         receiveBtn = (Button) findViewById(R.id.ReceiveBtn);
 
-
         listView.setOnItemLongClickListener((parent, view, position, id)-> {
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
+            String strmsg = "Do you want to delete this?\n";
+            strmsg += "The selected row is:\n";
+            if(listMessage.get(position).isSend) {
+                alert.setView(getLayoutInflater().inflate(R.layout.activity_main_send, null) );
+            } else {
+                alert.setView(getLayoutInflater().inflate(R.layout.activity_main_receive, null) );
+            }
+            //strmsg += "The selected row is:" + position + "\n";
+            //strmsg += "The selected message is:" + listMessage.get(position).message + "\n";
+            strmsg += "The database id : " + position;
+            alert.setMessage(strmsg);
+
            alert.setTitle("Do you want to delete this?" );
-           alert.setMessage("The selected row is:");
-                   alert.setPositiveButton("Yes",(click, arg)->{
-              listMessage.remove(listView);
-               adt.notifyDataSetChanged();
+           //alert.setMessage("The selected row is:" + position);
+           //alert.setMessage("The selected message is:" + listMessage.get(position).message);
+           //alert.setMessage("The database id :");
+           alert.setPositiveButton("Yes",(click, arg)->{
+              listMessage.remove(position);
+              adt.notifyDataSetChanged();
 
                 });
-                   alert.setView(getLayoutInflater().inflate(R.layout.activity_main_receive, null) );
-      alert.create().show();
+
+            alert.setNegativeButton("No", (click, arg) -> {
+            });
+            alert.create().show();
 
         return true;
     });
