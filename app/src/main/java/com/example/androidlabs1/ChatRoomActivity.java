@@ -43,6 +43,25 @@ public class ChatRoomActivity extends AppCompatActivity {
         receiveBtn = (Button) findViewById(R.id.ReceiveBtn);
 
 
+        listView.setOnItemLongClickListener((parent, view, position, id)-> {
+            AlertDialog.Builder  alert = new AlertDialog.Builder(this);
+           alert.setTitle("Do you want to delete this?" );
+           alert.setMessage("The selected row is:");
+                   alert.setPositiveButton("Yes",(click, arg)->{
+              listMessage.remove(listView);
+               adt.notifyDataSetChanged();
+
+                });
+                   alert.setView(getLayoutInflater().inflate(R.layout.activity_main_receive, null) );
+      alert.create().show();
+
+        return true;
+    });
+
+
+
+
+
 //       public void showAlertDialog (View v) {
 //            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 //                @Override
@@ -71,7 +90,6 @@ public class ChatRoomActivity extends AppCompatActivity {
 //            });
 
 
-
         sendBtn.setOnClickListener(c -> {
             String message = editText.getText().toString();
             MessageModel model = new MessageModel(message, true);
@@ -92,6 +110,8 @@ public class ChatRoomActivity extends AppCompatActivity {
 
 
         Log.d("ChatRoomActivity", "onCreate");
+
+
     }
 
 
