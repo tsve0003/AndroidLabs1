@@ -17,25 +17,28 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChatRoomActivity extends AppCompatActivity {
 
-    private  ArrayList<MessageModel> listMessage = new ArrayList<>();
-    private  Button sendBtn;
-    private  Button receiveBtn;
-    private  ListView listView;
-    private  EditText editText;
+    private ArrayList<MessageModel> listMessage = new ArrayList<>();
+    private Button sendBtn;
+    private Button receiveBtn;
+    private ListView listView;
+    private EditText editText;
     private ChatAdapter adt;
-    private  SwipeRefreshListener refresher;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
-        SwipeRefreshListener refresher = findViewById( R.id.refresh );
+
+
+
 
         listView = (ListView) findViewById(R.id.ListView);
         listView.setAdapter(adt = new ChatAdapter());
@@ -73,9 +76,7 @@ public class ChatRoomActivity extends AppCompatActivity {
             alert.create().show();
 
         return true;
-    });
-
-        sendBtn.setOnClickListener(c -> {
+    });    sendBtn.setOnClickListener(c -> {
             String message = editText.getText().toString();
             MessageModel model = new MessageModel(message, true);
             listMessage.add(model);
@@ -94,15 +95,16 @@ public class ChatRoomActivity extends AppCompatActivity {
         });
 
 
-        Log.d("ChatRoomActivity", "onCreate");
 
-
-    }
+    SwipeRefreshLayout refresher = findViewById(R.id.refresh);
+       refresher.setOnRefreshListener( () -> {
+        listMessage.remove( listMessage.size());
+        adt.notifyDataSetChanged();
+        refresher.setRefreshing(false);}  );
+}
 
 
     class ChatAdapter extends BaseAdapter {
-
-
 
         @Override
         public int getCount() {

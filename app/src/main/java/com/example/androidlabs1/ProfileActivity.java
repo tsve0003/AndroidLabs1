@@ -26,41 +26,39 @@ public class ProfileActivity extends AppCompatActivity {
         Intent fromMain = getIntent();
 
         String emailTyped = fromMain.getStringExtra("EMAIL");
+        takePictureBtn = (ImageButton) findViewById(R.id.ImageButton);
 
         //Put the string that was sent from FirstActivity into the edit text:
         EditText enterText = (EditText) findViewById(R.id.enterEmail);
         enterText.setText(emailTyped);
 
 
-        takePictureBtn = (ImageButton) findViewById(R.id.ImageButton);
-        takePictureBtn.setOnClickListener(c -> {
-
-
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-            }
-
-        });
-        Button btnCht = (Button)findViewById (R.id.chatBtn);
-        btnCht.setOnClickListener(c ->  {
+        Button btnCht = (Button) findViewById(R.id.chatBtn);
+        btnCht.setOnClickListener(c -> {
             Intent goToChatPage = new Intent(ProfileActivity.this, ChatRoomActivity.class);
 
             startActivity(goToChatPage);
 
         });
 
-            Log.e(ACTIVITY_NAME, "In function: onCreate()");
+        Log.e(ACTIVITY_NAME, "In function: onCreate()");
 
+        takePictureBtn.setOnClickListener(c -> {
+                dispatchTakePictureIntent();
+            });
+        }
+
+
+
+
+
+    private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
-
     }
-
-
-    @Override
+        @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE) {

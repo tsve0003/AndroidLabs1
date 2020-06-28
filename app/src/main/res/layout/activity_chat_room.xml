@@ -6,9 +6,9 @@
     android:layout_height="match_parent">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/refresh">
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+       android:id="@+id/refresh">
     <ListView
         android:id="@+id/ListView"
         android:stackFromBottom="true"
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/SendBtn"/>
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <Button
         android:id="@+id/SendBtn"
