@@ -2,6 +2,7 @@ package com.example.androidlabs1;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,12 +56,7 @@ public class ChatRoomActivity extends AppCompatActivity {
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
             alert.setTitle("Do you want to delete this?" )
             .setMessage("The selected row is: " + position + "\n" + "The database id : " + id)
-            //strmsg += "The selected row is:" + position + "\n";
-            //strmsg += "The selected message is:" + listMessage.get(position).message + "\n";
 
-           //alert.setMessage("The selected row is:" + position);
-           //alert.setMessage("The selected message is:" + listMessage.get(position).message);
-           //alert.setMessage("The database id :");
            .setPositiveButton("Yes",(click, arg)->{
               listMessage.remove(position);
               adt.notifyDataSetChanged();
@@ -73,16 +69,19 @@ public class ChatRoomActivity extends AppCompatActivity {
                 alert.setView(getLayoutInflater().inflate(R.layout.activity_main_receive, null) );
             }
 
+
             alert.create().show();
 
-        return true;
-    });    sendBtn.setOnClickListener(c -> {
+            return true;
+        });
+
+        sendBtn.setOnClickListener(c -> {
             String message = editText.getText().toString();
             MessageModel model = new MessageModel(message, true);
             listMessage.add(model);
             listView.setAdapter(adt);
+            editText.setText(null);
             adt.notifyDataSetChanged();
-            editText.setText("");
         });
 
         receiveBtn.setOnClickListener(c -> {
@@ -90,19 +89,11 @@ public class ChatRoomActivity extends AppCompatActivity {
             MessageModel model = new MessageModel(message, false);
             listMessage.add(model);
             listView.setAdapter(adt);
+            editText.setText(null);
             adt.notifyDataSetChanged();
-            editText.setText("");
         });
 
-
-
-    SwipeRefreshLayout refresher = findViewById(R.id.refresh);
-       refresher.setOnRefreshListener( () -> {
-        listMessage.remove( listMessage.size());
-        adt.notifyDataSetChanged();
-        refresher.setRefreshing(false);}  );
 }
-
 
     class ChatAdapter extends BaseAdapter {
 

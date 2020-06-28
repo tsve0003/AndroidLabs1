@@ -5,10 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-       android:id="@+id/refresh">
     <ListView
         android:id="@+id/ListView"
         android:stackFromBottom="true"
@@ -18,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/SendBtn"/>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <Button
         android:id="@+id/SendBtn"
@@ -27,6 +22,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:text="@string/SendText"/>
+
+    <Button
+        android:id="@+id/ReceiveBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:text="@string/ReceiveText"/>
+
     <EditText
         android:id="@+id/ChatEditText"
         android:layout_width="wrap_content"
@@ -35,11 +39,4 @@
         android:layout_toRightOf="@id/SendBtn"
         android:layout_toLeftOf="@id/ReceiveBtn"
         android:hint="@string/textField"/>
-    <Button
-        android:id="@+id/ReceiveBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:text="@string/ReceiveText"/>
 </RelativeLayout>
