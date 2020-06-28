@@ -29,81 +29,51 @@ public class ChatRoomActivity extends AppCompatActivity {
     private  ListView listView;
     private  EditText editText;
     private ChatAdapter adt;
+    private  SwipeRefreshListener refresher;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
+        SwipeRefreshListener refresher = findViewById( R.id.refresh );
 
         listView = (ListView) findViewById(R.id.ListView);
         listView.setAdapter(adt = new ChatAdapter());
         editText = (EditText) findViewById(R.id.ChatEditText);
+
+
+        listView.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
+        listView.setStackFromBottom(true);
 
         sendBtn = (Button) findViewById(R.id.SendBtn);
         receiveBtn = (Button) findViewById(R.id.ReceiveBtn);
 
         listView.setOnItemLongClickListener((parent, view, position, id)-> {
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
-            String strmsg = "Do you want to delete this?\n";
-            strmsg += "The selected row is:\n";
+            alert.setTitle("Do you want to delete this?" )
+            .setMessage("The selected row is: " + position + "\n" + "The database id : " + id)
+            //strmsg += "The selected row is:" + position + "\n";
+            //strmsg += "The selected message is:" + listMessage.get(position).message + "\n";
+
+           //alert.setMessage("The selected row is:" + position);
+           //alert.setMessage("The selected message is:" + listMessage.get(position).message);
+           //alert.setMessage("The database id :");
+           .setPositiveButton("Yes",(click, arg)->{
+              listMessage.remove(position);
+              adt.notifyDataSetChanged();
+           })
+            .setNegativeButton("No", (click, arg) -> {
+            });
             if(listMessage.get(position).isSend) {
                 alert.setView(getLayoutInflater().inflate(R.layout.activity_main_send, null) );
             } else {
                 alert.setView(getLayoutInflater().inflate(R.layout.activity_main_receive, null) );
             }
-            //strmsg += "The selected row is:" + position + "\n";
-            //strmsg += "The selected message is:" + listMessage.get(position).message + "\n";
-            strmsg += "The database id : " + position;
-            alert.setMessage(strmsg);
 
-           alert.setTitle("Do you want to delete this?" );
-           //alert.setMessage("The selected row is:" + position);
-           //alert.setMessage("The selected message is:" + listMessage.get(position).message);
-           //alert.setMessage("The database id :");
-           alert.setPositiveButton("Yes",(click, arg)->{
-              listMessage.remove(position);
-              adt.notifyDataSetChanged();
-
-                });
-
-            alert.setNegativeButton("No", (click, arg) -> {
-            });
             alert.create().show();
 
         return true;
     });
-
-
-
-
-
-//       public void showAlertDialog (View v) {
-//            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//                @Override
-//                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//                    AlertDialog.Builder alert = new AlertDialog.Builder(ChatRoomActivity.this);
-//                    alert.setTitle("Alert");
-//                    alert.setMessage("Do you want to delete this?");
-//                    alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            list.remove(listView);
-//                            Toast.makeText(ChatRoomActivity.this, "The selected row is: \n The database id is: ",
-//                                    Toast.LENGTH_SHORT).show();
-//                            adt.notifyDataSetChanged();
-//                        }
-//                    });
-//                    alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//
-//                        }
-//                    });
-//                    alert.create().show();
-//                    return true;
-//                }
-//            });
-
 
         sendBtn.setOnClickListener(c -> {
             String message = editText.getText().toString();
