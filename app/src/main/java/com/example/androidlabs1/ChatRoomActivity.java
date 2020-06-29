@@ -55,14 +55,14 @@ public class ChatRoomActivity extends AppCompatActivity {
         listView.setOnItemLongClickListener((parent, view, position, id)-> {
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
             alert.setTitle("Do you want to delete this?" )
-            .setMessage("The selected row is: " + position + "\n" + "The database id : " + id)
+                    .setMessage("The selected row is: " + position + "\n" + "The database id : " + id)
 
-           .setPositiveButton("Yes",(click, arg)->{
-              listMessage.remove(position);
-              adt.notifyDataSetChanged();
-           })
-            .setNegativeButton("No", (click, arg) -> {
-            });
+                    .setPositiveButton("Yes",(click, arg)->{
+                        listMessage.remove(position);
+                        adt.notifyDataSetChanged();
+                    })
+                    .setNegativeButton("No", (click, arg) -> {
+                    });
             if(listMessage.get(position).isSend) {
                 alert.setView(getLayoutInflater().inflate(R.layout.activity_main_send, null) );
             } else {
@@ -93,7 +93,7 @@ public class ChatRoomActivity extends AppCompatActivity {
             adt.notifyDataSetChanged();
         });
 
-}
+    }
 
     class ChatAdapter extends BaseAdapter {
 
@@ -114,26 +114,24 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-           MessageModel message = (MessageModel) getItem(position);
-            View newView = convertView;
+            MessageModel message = (MessageModel) getItem(position);
+//            View newView = convertView;
             LayoutInflater inflater = getLayoutInflater();
 
-            if(newView == null) {
+            if(convertView == null) {
                 if (message.isSend) {
-                    newView = inflater.inflate(R.layout.activity_main_send, parent, false);
+                    convertView = inflater.inflate(R.layout.activity_main_send, parent, false);
                 }
                 else {
-                    newView = inflater.inflate(R.layout.activity_main_receive, parent, false);
+                    convertView = inflater.inflate(R.layout.activity_main_receive, parent, false);
                 }
             }
-            TextView  messageText = (TextView)newView.findViewById(R.id.textViewMessage);
+            TextView  messageText = (TextView)convertView.findViewById(R.id.textViewMessage);
             messageText.setText(listMessage.get(position).message);
 
 
-            return newView;
+            return convertView;
         }
 
     }
-    }
-
-
+}
