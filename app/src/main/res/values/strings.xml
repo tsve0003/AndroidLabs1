@@ -23,6 +23,14 @@
     <string name= "textField">Type here</string>
     <string name="SendText">Send</string>
     <string name="ReceiveText">Receive</string>
+    <string name="alertBuilderTitle">Do you want to delete this? </string>
+    <string name="alertBuilderMsg1">The selected row is:  </string>
+    <string name="alertBuilderMsg2">The database id is:  </string>
+    <string name="yes">Yes  </string>
+    <string name="no">No </string>
+
+
+
 
 
 </resources>

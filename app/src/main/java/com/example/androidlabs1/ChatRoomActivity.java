@@ -54,14 +54,14 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         listView.setOnItemLongClickListener((parent, view, position, id)-> {
             AlertDialog.Builder  alert = new AlertDialog.Builder(this);
-            alert.setTitle("Do you want to delete this?" )
-                    .setMessage("The selected row is: " + position + "\n" + "The database id : " + id)
+            alert.setTitle(getResources().getString(R.string.alertBuilderTitle))
+                    .setMessage(getResources().getString(R.string.alertBuilderMsg1) + " " + position + "\n" + getResources().getString(R.string.alertBuilderMsg2) + " " + id)
 
-                    .setPositiveButton("Yes",(click, arg)->{
+                    .setPositiveButton(getResources().getString(R.string.yes),(click, arg)->{
                         listMessage.remove(position);
                         adt.notifyDataSetChanged();
                     })
-                    .setNegativeButton("No", (click, arg) -> {
+                    .setNegativeButton(getResources().getString(R.string.no), (click, arg) -> {
                     });
             if(listMessage.get(position).isSend) {
                 alert.setView(getLayoutInflater().inflate(R.layout.activity_main_send, null) );

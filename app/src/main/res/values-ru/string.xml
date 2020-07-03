@@ -24,4 +24,9 @@
     <string name="textField">Напечатайте здесь</string>
     <string name="SendText">Отправить</string>
     <string name="ReceiveText">Получить</string>
+    <string name="alertBuilderTitle"> Вы хотите удалить сообщение? </string>
+    <string name="alertBuilderMsg1">Выбранный ряд: </string>
+    <string name="alertBuilderMsg2">ID базы данных:  </string>
+    <string name="yes">Да  </string>
+    <string name="no">Нет </string>
 </resources>
