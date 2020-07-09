@@ -64,6 +64,9 @@ public class ChatRoomActivity extends AppCompatActivity {
                     .setMessage(getResources().getString(R.string.alertBuilderMsg1) + " " + position + "\n" + getResources().getString(R.string.alertBuilderMsg2) + " " + id)
 
                     .setPositiveButton(getResources().getString(R.string.yes), (click, arg) -> {
+                        //MessageModel selectedMessage = listMessage.get(position);
+                        //dbOpener.deleteMessage(selectedMessage);
+                        dbOpener.deleteMessage(position);
                         listMessage.remove(position);
                         adt.notifyDataSetChanged();
                     })
@@ -112,6 +115,8 @@ public class ChatRoomActivity extends AppCompatActivity {
 //           adt.notifyDataSetChanged();
         });
 
+        listMessage.clear();
+        viewData();
     }
 
         private void viewData(){

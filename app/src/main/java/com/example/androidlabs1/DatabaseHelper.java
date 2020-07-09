@@ -63,7 +63,17 @@ import android.util.Log;
         return result != -1; //if result = -1 data doesn't insert
     }
 
-    //view data
+    // (MessageModel selectedMessage)
+     protected void deleteMessage(int position)
+     {
+         SQLiteDatabase db = this.getWritableDatabase();
+         position += 1;
+         db.delete(DatabaseHelper.DB_TABLE, DatabaseHelper.COL_MESSAGEID + "= ?", new String[] {Long.toString(position)});
+         //db.delete(DatabaseHelper.DB_TABLE, DatabaseHelper.COL_MESSAGEID + "= ?", new String[] {Long.toString(selectedMessage.getId())});
+     }
+
+
+     //view data
     public Cursor viewDataDb(){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "Select * from "+DB_TABLE;
