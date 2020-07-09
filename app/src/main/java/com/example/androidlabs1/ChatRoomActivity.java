@@ -92,6 +92,9 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         sendBtn.setOnClickListener(c -> {
             String message = editText.getText().toString();
+            MessageModel model = new MessageModel(message, true);listMessage.add(model);
+            listView.setAdapter(adt);
+            editText.setText(null);adt.notifyDataSetChanged();
             if (!message.equals("")){
 
                 db.insertData(message, true);
@@ -100,11 +103,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                 viewData();
             }
         });
-//            MessageModel model = new MessageModel(message, true);
-//            listMessage.add(model);
-//            listView.setAdapter(adt);
-//            editText.setText(null);
-//            adt.notifyDataSetChanged();
+
 
         receiveBtn.setOnClickListener(c -> {
             String message = editText.getText().toString();
