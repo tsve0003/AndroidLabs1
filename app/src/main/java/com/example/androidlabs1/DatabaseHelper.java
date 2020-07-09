@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-class DatabaseHelper extends SQLiteOpenHelper {
+ public class DatabaseHelper extends SQLiteOpenHelper {
 
     static final String DB_NAME = "MessagesDB";
     static final String DB_TABLE = "Messages_Table";
