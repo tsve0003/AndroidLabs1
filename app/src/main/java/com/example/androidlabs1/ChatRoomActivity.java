@@ -1,6 +1,7 @@
 package com.example.androidlabs1;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
@@ -31,6 +32,7 @@ public class ChatRoomActivity extends AppCompatActivity {
     private ListView listView;
     private EditText editText;
     private ChatAdapter adt;
+    DatabaseHelper db;
 
 
     @Override
@@ -39,11 +41,10 @@ public class ChatRoomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat_room);
 
 
-
-
         listView = (ListView) findViewById(R.id.ListView);
         listView.setAdapter(adt = new ChatAdapter());
         editText = (EditText) findViewById(R.id.ChatEditText);
+        db = new DatabaseHelper(this);
 
 
         listView.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
@@ -52,21 +53,21 @@ public class ChatRoomActivity extends AppCompatActivity {
         sendBtn = (Button) findViewById(R.id.SendBtn);
         receiveBtn = (Button) findViewById(R.id.ReceiveBtn);
 
-        listView.setOnItemLongClickListener((parent, view, position, id)-> {
-            AlertDialog.Builder  alert = new AlertDialog.Builder(this);
+        listView.setOnItemLongClickListener((parent, view, position, id) -> {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setTitle(getResources().getString(R.string.alertBuilderTitle))
                     .setMessage(getResources().getString(R.string.alertBuilderMsg1) + " " + position + "\n" + getResources().getString(R.string.alertBuilderMsg2) + " " + id)
 
-                    .setPositiveButton(getResources().getString(R.string.yes),(click, arg)->{
+                    .setPositiveButton(getResources().getString(R.string.yes), (click, arg) -> {
                         listMessage.remove(position);
                         adt.notifyDataSetChanged();
                     })
                     .setNegativeButton(getResources().getString(R.string.no), (click, arg) -> {
                     });
-            if(listMessage.get(position).isSend) {
-                alert.setView(getLayoutInflater().inflate(R.layout.activity_main_send, null) );
+            if (listMessage.get(position).isSend) {
+                alert.setView(getLayoutInflater().inflate(R.layout.activity_main_send, null));
             } else {
-                alert.setView(getLayoutInflater().inflate(R.layout.activity_main_receive, null) );
+                alert.setView(getLayoutInflater().inflate(R.layout.activity_main_receive, null));
             }
 
 
@@ -74,6 +75,20 @@ public class ChatRoomActivity extends AppCompatActivity {
 
             return true;
         });
+    }
+
+        private void viewData(){
+            Cursor cursor = db.viewData();
+
+            if (cursor.getCount() != 0){
+                while (cursor.moveToNext()){
+                    MessageModel model = new MessageModel(cursor.getString(1), cursor.getInt(2)==0?true:false);
+                    listMessage.add(model);
+                    ChatAdapter adt = new ChatAdapter();
+                    listView.setAdapter(adt);
+
+                }
+            }
 
         sendBtn.setOnClickListener(c -> {
             String message = editText.getText().toString();
