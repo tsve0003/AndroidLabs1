@@ -1,7 +1,6 @@
 package com.example.androidlabs1;
 
 
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
