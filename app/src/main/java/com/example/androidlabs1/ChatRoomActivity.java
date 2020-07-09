@@ -57,6 +57,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         sendBtn = (Button) findViewById(R.id.SendBtn);
         receiveBtn = (Button) findViewById(R.id.ReceiveBtn);
 
+
         listView.setOnItemLongClickListener((parent, view, position, id) -> {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setTitle(getResources().getString(R.string.alertBuilderTitle))
@@ -97,8 +98,8 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         sendBtn.setOnClickListener(c -> {
             String message = editText.getText().toString();
-    //            MessageModel model = new MessageModel(message, true);
-    //            listMessage.add(model);
+//              MessageModel model = new MessageModel(message, true);
+//              listMessage.add(model);
     //            listView.setAdapter(adt);
 //               editText.setText(null);
 //                adt.notifyDataSetChanged();
@@ -119,13 +120,13 @@ public class ChatRoomActivity extends AppCompatActivity {
                 dbOpener.insertData(message, false);
                 editText.setText("");
                 listMessage.clear();
-//                viewData();
+                viewData();
             }
 //            MessageModel model = new MessageModel(message, false);
 //            listMessage.add(model);
 //            listView.setAdapter(adt);
-            editText.setText(null);
-           adt.notifyDataSetChanged();
+//            editText.setText(null);
+//           adt.notifyDataSetChanged();
         });
 
     }
@@ -144,7 +145,7 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         @Override
         public long getItemId(int position) {
-            return position;
+            return getItem(position). getId();
         }
 
         @Override

@@ -33,4 +33,13 @@ public class MessageModel {
     public void setSend(boolean send) {
         isSend = send;
     }
+
+    public long getId() {
+        return id;
+
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }
