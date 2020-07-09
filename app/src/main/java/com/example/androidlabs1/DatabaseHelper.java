@@ -17,11 +17,11 @@ import android.util.Log;
     //columns
     static final String COL_MESSAGE = "Message";
     static final String COL_ISSEND = "IsSend";
-    static final String COL_MESSAGEID = "MessageID";
-    static final int VERSION_NUM = 1;
+    static final String COL_MESSAGEID = "_id";
+    static final int VERSION_NUM = 2;
 
     //queries
-    private static final String CREATE_TABLE = "CREATE TABLE "+DB_TABLE+" ("+COL_MESSAGEID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+COL_MESSAGE+" TEXT, "+COL_ISSEND+" BIT);";
+    private static final String CREATE_TABLE = "CREATE TABLE "+DB_TABLE+" (_id INTEGER PRIMARY KEY AUTOINCREMENT, "+COL_MESSAGE+" TEXT, "+COL_ISSEND+" INTEGER);";
 
     public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, VERSION_NUM);
@@ -45,15 +45,16 @@ import android.util.Log;
 
     //insert data
     public boolean insertData(String message, boolean isSend) {
+
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_MESSAGE, message);
+        contentValues.put(DatabaseHelper.COL_MESSAGE, message);
         if (isSend)
-            contentValues.put(COL_ISSEND, 0);
+            contentValues.put(DatabaseHelper.COL_ISSEND, 0);
         else
-            contentValues.put(COL_ISSEND, 1);
+            contentValues.put(DatabaseHelper.COL_ISSEND, 1);
 
-        long result = db.insert(DB_TABLE, null, contentValues);
+        long result = db.insert(DatabaseHelper.DB_TABLE, null, contentValues);
 
         return result != -1; //if result = -1 data doesn't insert
     }

@@ -2,6 +2,7 @@ package com.example.androidlabs1;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
@@ -32,7 +33,8 @@ public class ChatRoomActivity extends AppCompatActivity {
     private ListView listView;
     private EditText editText;
     private ChatAdapter adt;
-    DatabaseHelper db;
+    DatabaseHelper dbOpener;
+    SQLiteDatabase db;
 
 
     @Override
@@ -44,8 +46,9 @@ public class ChatRoomActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.ListView);
         listView.setAdapter(adt = new ChatAdapter());
         editText = (EditText) findViewById(R.id.ChatEditText);
-        db = new DatabaseHelper(this);
-        viewData();
+        dbOpener = new DatabaseHelper(this);
+
+//        viewData();
 
 
         listView.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
@@ -79,7 +82,7 @@ public class ChatRoomActivity extends AppCompatActivity {
     }
 
         private void viewData(){
-            Cursor cursor = db.viewDataDb();
+            Cursor cursor = dbOpener.viewDataDb();
 
             if (cursor.getCount() != 0){
                 while (cursor.moveToNext()){
@@ -87,6 +90,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                     listMessage.add(model);
                     ChatAdapter adt = new ChatAdapter();
                     listView.setAdapter(adt);
+                    adt.notifyDataSetChanged();
 
                 }
             }
@@ -96,11 +100,11 @@ public class ChatRoomActivity extends AppCompatActivity {
     //            MessageModel model = new MessageModel(message, true);
     //            listMessage.add(model);
     //            listView.setAdapter(adt);
-    //            editText.setText(null);
+//               editText.setText(null);
 //                adt.notifyDataSetChanged();
             if (!message.equals("")){
 
-                db.insertData(message, true);
+                dbOpener.insertData(message, true);
                 editText.setText("");
                 listMessage.clear();
                 viewData();
@@ -111,7 +115,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         receiveBtn.setOnClickListener(c -> {
             String message = editText.getText().toString();
             if (!message.equals("")) {
-                db.insertData(message, false);
+                dbOpener.insertData(message, false);
                 editText.setText("");
                 listMessage.clear();
                 viewData();
