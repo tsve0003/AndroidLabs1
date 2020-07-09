@@ -58,7 +58,7 @@ import android.util.Log;
     }
 
     //view data
-    public Cursor viewData(){
+    public Cursor viewDataDb(){
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "Select * from "+DB_TABLE;
         Cursor cursor = db.rawQuery(query, null);

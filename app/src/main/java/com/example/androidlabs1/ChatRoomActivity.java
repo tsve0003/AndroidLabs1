@@ -42,7 +42,7 @@ public class ChatRoomActivity extends AppCompatActivity {
 
 
         listView = (ListView) findViewById(R.id.ListView);
-        listView.setAdapter(adt = new ChatAdapter());
+//        listView.setAdapter(adt = new ChatAdapter());
         editText = (EditText) findViewById(R.id.ChatEditText);
         db = new DatabaseHelper(this);
         viewData();
@@ -79,7 +79,7 @@ public class ChatRoomActivity extends AppCompatActivity {
     }
 
         private void viewData(){
-            Cursor cursor = db.viewData();
+            Cursor cursor = db.viewDataDb();
 
             if (cursor.getCount() != 0){
                 while (cursor.moveToNext()){
@@ -96,7 +96,8 @@ public class ChatRoomActivity extends AppCompatActivity {
     //            MessageModel model = new MessageModel(message, true);
     //            listMessage.add(model);
     //            listView.setAdapter(adt);
-    //            editText.setText(null);adt.notifyDataSetChanged();
+    //            editText.setText(null);
+//                adt.notifyDataSetChanged();
             if (!message.equals("")){
 
                 db.insertData(message, true);
