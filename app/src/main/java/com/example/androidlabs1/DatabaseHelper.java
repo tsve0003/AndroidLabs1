@@ -27,6 +27,7 @@ import android.util.Log;
         super(context, DB_NAME, null, VERSION_NUM);
     }
 
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE);
@@ -45,6 +46,7 @@ import android.util.Log;
 
     //insert data
     public boolean insertData(String message, boolean isSend) {
+
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();

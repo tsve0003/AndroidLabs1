@@ -112,19 +112,20 @@ public class ChatRoomActivity extends AppCompatActivity {
         });
 
 
+
         receiveBtn.setOnClickListener(c -> {
             String message = editText.getText().toString();
             if (!message.equals("")) {
                 dbOpener.insertData(message, false);
                 editText.setText("");
                 listMessage.clear();
-                viewData();
+//                viewData();
             }
 //            MessageModel model = new MessageModel(message, false);
 //            listMessage.add(model);
 //            listView.setAdapter(adt);
-//            editText.setText(null);
-//            adt.notifyDataSetChanged();
+            editText.setText(null);
+           adt.notifyDataSetChanged();
         });
 
     }
