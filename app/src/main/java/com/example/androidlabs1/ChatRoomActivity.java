@@ -45,6 +45,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         listView.setAdapter(adt = new ChatAdapter());
         editText = (EditText) findViewById(R.id.ChatEditText);
         db = new DatabaseHelper(this);
+        viewData();
 
 
         listView.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
@@ -92,9 +93,10 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         sendBtn.setOnClickListener(c -> {
             String message = editText.getText().toString();
-            MessageModel model = new MessageModel(message, true);listMessage.add(model);
-            listView.setAdapter(adt);
-            editText.setText(null);adt.notifyDataSetChanged();
+    //            MessageModel model = new MessageModel(message, true);
+    //            listMessage.add(model);
+    //            listView.setAdapter(adt);
+    //            editText.setText(null);adt.notifyDataSetChanged();
             if (!message.equals("")){
 
                 db.insertData(message, true);
