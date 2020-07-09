@@ -18,12 +18,13 @@ import android.util.Log;
     static final String COL_MESSAGE = "Message";
     static final String COL_ISSEND = "IsSend";
     static final String COL_MESSAGEID = "MessageID";
+    static final int VERSION_NUM = 1;
 
     //queries
     private static final String CREATE_TABLE = "CREATE TABLE "+DB_TABLE+" ("+COL_MESSAGEID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+COL_MESSAGE+" TEXT, "+COL_ISSEND+" BIT);";
 
     public DatabaseHelper(Context context) {
-        super(context, DB_NAME, null, 2);
+        super(context, DB_NAME, null, VERSION_NUM);
     }
 
     @Override

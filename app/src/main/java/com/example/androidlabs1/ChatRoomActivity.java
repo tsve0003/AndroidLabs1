@@ -42,7 +42,7 @@ public class ChatRoomActivity extends AppCompatActivity {
 
 
         listView = (ListView) findViewById(R.id.ListView);
-//        listView.setAdapter(adt = new ChatAdapter());
+        listView.setAdapter(adt = new ChatAdapter());
         editText = (EditText) findViewById(R.id.ChatEditText);
         db = new DatabaseHelper(this);
         viewData();
