@@ -89,7 +89,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                 while (cursor.moveToNext()){
                     MessageModel model = new MessageModel(cursor.getString(1), cursor.getInt(2)==0?true:false);
                     listMessage.add(model);
-                    ChatAdapter adt = new ChatAdapter();
+//                    ChatAdapter adt = new ChatAdapter();
                     listView.setAdapter(adt);
                     adt.notifyDataSetChanged();
 

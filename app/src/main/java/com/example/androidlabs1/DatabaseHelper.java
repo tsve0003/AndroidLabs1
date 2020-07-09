@@ -57,8 +57,8 @@ import android.util.Log;
             contentValues.put(DatabaseHelper.COL_ISSEND, 1);
 
         long result = db.insert(DatabaseHelper.DB_TABLE, null, contentValues);
-        MessageModel messageModel = new MessageModel();
-
+//        MessageModel messageModel = new MessageModel();
+//
 
         return result != -1; //if result = -1 data doesn't insert
     }
