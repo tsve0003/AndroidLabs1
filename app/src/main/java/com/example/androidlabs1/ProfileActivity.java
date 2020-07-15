@@ -15,6 +15,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     ImageButton takePictureBtn;
+    Button weatherForcastBtn;
     public static final String ACTIVITY_NAME = "PROFILE_ACTIVITY";
 
     @Override
@@ -26,9 +27,18 @@ public class ProfileActivity extends AppCompatActivity {
         Intent fromMain = getIntent();
 
         String emailTyped = fromMain.getStringExtra("EMAIL");
+
         takePictureBtn = (ImageButton) findViewById(R.id.ImageButton);
 
-        //Put the string that was sent from FirstActivity into the edit text:
+        weatherForcastBtn = (Button) findViewById(R.id.weatherForecastBtn);
+        weatherForcastBtn.setOnClickListener(c -> {
+                    Intent goToWeatherPage = new Intent(ProfileActivity.this, WeatherForecast.class);
+                    startActivity(goToWeatherPage);
+                });
+
+
+
+            //Put the string that was sent from FirstActivity into the edit text:
         EditText enterText = (EditText) findViewById(R.id.enterEmail);
         enterText.setText(emailTyped);
 
@@ -40,6 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(goToChatPage);
 
         });
+
 
         Log.e(ACTIVITY_NAME, "In function: onCreate()");
 

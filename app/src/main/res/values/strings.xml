@@ -28,6 +28,11 @@
     <string name="alertBuilderMsg2">The database id is:  </string>
     <string name="yes">Yes  </string>
     <string name="no">No </string>
+    <string name="btn_weather">Check the weather </string>
+    <string name="currentTemp">Current Temperature </string>
+    <string name="minTemp">Minimum Temperature</string>
+    <string name="maxTemp">Maximum Temperature </string>
+    <string name="UV_rating">UV Rate </string>
 
 
 </resources>

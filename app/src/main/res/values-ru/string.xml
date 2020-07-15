@@ -29,4 +29,9 @@
     <string name="alertBuilderMsg2">ID базы данных:  </string>
     <string name="yes">Да  </string>
     <string name="no">Нет </string>
+    <string name="btn_weather">Погода </string>
+    <string name="currentTemp">Текущая температура </string>
+    <string name="minTemp">Минимальная температура</string>
+    <string name="maxTemp">Максимальная температура </string>
+    <string name="UV_rating">Диапазон УФО </string>
 </resources>
