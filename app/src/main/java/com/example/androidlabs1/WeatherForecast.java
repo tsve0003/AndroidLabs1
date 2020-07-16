@@ -100,21 +100,21 @@ public class WeatherForecast extends AppCompatActivity {
                             String tagName = xpp.getName(); //get the name of the starting tag: <tagName>
                             if (tagName.equals("temperature")) {
                                 tempValue = xpp.getAttributeValue(null, "value");
-                                Log.e("AsyncTask", "Found value message: " + tempValue);
+                                Log.i("AsyncTask", "Found value message: " + tempValue);
                                 publishProgress(25);
                                 Thread.sleep(500); //pause for 2000 milliseconds to watch the progress bar spin
                                 min = xpp.getAttributeValue(null, "min");
-                                Log.e("AsyncTask", "Found min message: " + min);
+                                Log.i("AsyncTask", "Found min message: " + min);
                                 publishProgress(50);
                                 Thread.sleep(500); //pause for 2000 milliseconds to watch the progress bar spin
                                 max = xpp.getAttributeValue(null, "max");
-                                Log.e("AsyncTask", "Found max message: " + max);
+                                Log.i("AsyncTask", "Found max message: " + max);
                                 publishProgress(75);
 
                             } else if (tagName.equals("weather")) {
                                 weatherIcon = xpp.getAttributeValue(null, "icon");
                                 String fileName = weatherIcon + ".png";
-                                Log.e("AsyncTask", "Found icon name: " + weatherIcon);
+                                Log.i("AsyncTask", "Found icon name: " + weatherIcon);
                                 if (fileExistance(fileName)) {
                                     FileInputStream fis = null;
                                     try {
