@@ -185,10 +185,10 @@ public class WeatherForecast extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(String s) {
-                currentTextView.setText("Current temperature: " + tempValue + "°C");
-                minTextView.setText("Min temperature: " + min + "°C");
-                maxTextView.setText("Max temperature: " + max + "°C");
-                uvRating.setText("UV Rating: " + uv);
+                currentTextView.setText( getResources().getString(R.string.currentTemp) +": " + tempValue + "°C");
+                minTextView.setText( getResources().getString(R.string.minTemp) +": " + min + "°C");
+                maxTextView.setText( getResources().getString(R.string.maxTemp)+": " + max + "°C");
+                uvRating.setText(getResources().getString(R.string.UV_rating)+": " + uv);
                 weatherImageView.setImageBitmap(image);
                 bar.setVisibility(View.INVISIBLE);
             }
