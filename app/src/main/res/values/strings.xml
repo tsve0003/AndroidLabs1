@@ -33,6 +33,11 @@
     <string name="minTemp">Minimum Temperature</string>
     <string name="maxTemp">Maximum Temperature </string>
     <string name="UV_rating">UV Rate </string>
+    <string name="hide1">Hide</string>
+    <string name="messageText">Message Here</string>
+    <string name="idText">ID=</string>
+    <string name="checkbox_receive">Is a Receive Message</string>
+    <string name="checkbox_send">Is a Send Message</string>
 
 
 </resources>

@@ -34,4 +34,9 @@
     <string name="minTemp">Минимальная температура</string>
     <string name="maxTemp">Максимальная температура </string>
     <string name="UV_rating">Диапазон УФО </string>
+    <string name="hide1">Спрятать</string>
+    <string name="messageText">Сообщение здесь</string>
+    <string name="idText">ID=</string>
+    <string name="checkbox_receive">Получить сообщение</string>
+    <string name="checkbox_send">Отправить сообщение</string>
 </resources>

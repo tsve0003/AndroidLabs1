@@ -1,6 +1,7 @@
 package com.example.androidlabs1;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -35,6 +36,13 @@ public class ChatRoomActivity extends AppCompatActivity {
     private ChatAdapter adt;
     DatabaseHelper dbOpener;
     SQLiteDatabase db;
+    private static final String ACTIVITY_NAME = "PROFILE_ACTIVITY";
+    public static final String ITEM_SELECTED = "ITEM";
+    public static final String ITEM_POSITION = "POSITION";
+    public static final String ITEM_IS_SEND = "IS_SEND";
+    public static final String ITEM_ID = "ID";
+    private ArrayList<MessageModel> list_message = new ArrayList<>();
+    private AppCompatActivity parentActivity;
 
 
     @Override
@@ -48,6 +56,8 @@ public class ChatRoomActivity extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.ChatEditText);
         dbOpener = new DatabaseHelper(this);
 
+        boolean isTablet = findViewById(R.id.fragmentLocation) != null;
+
 //        viewData();
 
 
@@ -56,6 +66,29 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         sendBtn = (Button) findViewById(R.id.SendBtn);
         receiveBtn = (Button) findViewById(R.id.ReceiveBtn);
+        listView.setOnItemClickListener((list, item, position, id) -> {
+            //Create a bundle to pass data to the new fragment
+            Bundle dataToPass = new Bundle();
+            dataToPass.putString(ITEM_SELECTED, list_message.get(position).message);
+            dataToPass.putBoolean(ITEM_IS_SEND, list_message.get(position).isSend());
+            dataToPass.putInt(ITEM_POSITION, position);
+            dataToPass.putLong(ITEM_ID, list_message.get(position).id);
+
+            if (isTablet) {
+                DetailsFragment dFragment = new DetailsFragment(); //add a DetailFragment
+                dFragment.setArguments(dataToPass); //pass it a bundle for information
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentLocation, dFragment) //Add the fragment in FrameLayout
+                        .commit(); //actually load the fragment.
+            } else //isPhone
+            {
+                Intent nextActivity = new Intent(ChatRoomActivity.this, EmptyActivity.class);
+                nextActivity.putExtras(dataToPass); //send data to next activity
+                startActivity(nextActivity); //make the transition
+            }
+        });
+
 
 
         listView.setOnItemLongClickListener((parent, view, position, id) -> {
